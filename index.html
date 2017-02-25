@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tour</title>
+</head>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="tour/tour.js"></script>
+
+<link href="tour/style.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald" rel="stylesheet">
+
+<style type="text/css">
+	html, body { height: 100%; position: relative; margin: 0; padding: 0; border: 0; overflow: auto; }
+	body { font-family: 'Open Sans', sans-serif; line-height: 1; }
+	h1,h2,h3,h4,h5,h6 { font-family: 'Oswald', sans-serif; }
+	p { font-size: 14px; }
+
+	.element { position: absolute; width: 200px; height: 150px; background-color: #333333; }
+	.element.left { left: 10px; top: 200px; }
+	.element.right { right: 10px; top: 200px; }
+	.element.bottom { bottom: 10px; left: 50%; }
+	.element.top { top: 10px; left: 50%; }
+</style>
+
+<body>
+	<div class="element left"></div>
+	<div class="element right"></div>
+	<div class="element top"></div>
+	<div class="element bottom"></div>
+
+	<ul id="tour" class="dark">
+		<li data-target=".element.left" data-button="Next">
+			<h2>Left</h2>
+			<p>Description goes here.</p>
+		</li>
+		<li data-target=".element.right" data-button="Next">
+			<h2>Right</h2>
+			<p>Description goes here.</p>
+		</li>
+		<li data-target=".element.top" data-button="Next">
+			<h2>Top</h2>
+			<p>Description goes here.</p>
+		</li>
+		<li data-target=".element.bottom" data-button="Finished">
+			<h2>Bottom</h2>
+			<p>Description goes here.</p>
+		</li>
+	</ul>
+</body>
+
+<script type="text/javascript">
+	$(function(){
+		var tour = new Tour('#tour');
+	});
+</script>
+
+</html>
