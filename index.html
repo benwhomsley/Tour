@@ -22,6 +22,7 @@
 	.element.right { right: 10px; top: 200px; }
 	.element.bottom { bottom: 10px; left: 50%; }
 	.element.top { top: 10px; left: 50%; }
+	.hidden { display: none; }
 </style>
 
 <body>
@@ -30,7 +31,9 @@
 	<div class="element top"></div>
 	<div class="element bottom"></div>
 
-	<ul id="tour" class="dark">
+	<button id="start-tour">Start Tour</button>
+
+	<ul id="tour" class="hidden" data-theme="dark">
 		<li data-target=".element.left" data-button="Next">
 			<h2>Left</h2>
 			<p>Description goes here.</p>
@@ -51,8 +54,14 @@
 </body>
 
 <script type="text/javascript">
-	$(function(){
-		var tour = new Tour('#tour');
+	$('#start-tour').on('click', function(){
+		var options = {
+			progress 	: true,
+			intelitip 	: true,
+			tipWidth 	: 500,
+			expose 		: true
+		}
+		var tour = new Tour('#tour', options);
 	});
 </script>
 

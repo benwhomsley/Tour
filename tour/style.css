@@ -1,10 +1,12 @@
 /*Tour style*/
-.tour-step { position: absolute; padding: 20px; box-sizing: border-box; width: 300px; opacity: 0; visibility: hidden; pointer-events: none; -webkit-transition: all 0.3s; -moz-transition: all 0.3s; -ms-transition: all 0.3s; transition: all 0.3s; z-index: 9999; }
+.tour-step { position: absolute; padding: 20px; box-sizing: border-box; width: 300px; opacity: 0; visibility: hidden; pointer-events: none; -webkit-transition: opacity 0.3s; -moz-transition: opacity 0.3s; -ms-transition: opacity 0.3s; transition: opacity 0.3s; z-index: 9999; }
 .tour-step.current { opacity: 1; visibility: visible; pointer-events: all; }
 .tour-step h2, .tour-step p { margin: 0 0 20px 0; }
 .tour-step a { padding: 8px 12px; font-size: 14px; text-decoration: none; line-height: 1; box-sizing: border-box; float: left; cursor: pointer; }
 .tour-step a:hover { background-color: #333; }
 .tour-step .tour-tip { position: absolute; border-style: solid; z-index: 9999; }
+.tour-step .tour-progress { position: absolute; right: 12px; bottom: 10px; font-size: 12px; opacity: 0.5; }
+.tour-expose { position: fixed; top: 0; bottom: 0; left: 0; right: 0; background-color: black; opacity: 0.5; z-index: 9997; }
 
 /*Tour light theme*/
 .tour-step.light { background-color: #fff; color: #333; }
