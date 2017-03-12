@@ -1,6 +1,7 @@
 // TO DO LIST
 // - Add expose layer and possibly an extra option on the tip to remove the next button to force people to click the target element
 
+// - Need to check if the tip is still on the screen and if not scale and possibly re-position it - inside positionTips method.
 // - Optimize code (ongoing)
 
 
@@ -115,11 +116,23 @@ Tour.prototype.init = function(){
 	// Set the current step
 	this.currentStep = 1;
 
-	// Remove any previous click binding on the tour buttons to avoid calling the click event multiple times
-	$(document).off('click', '.tour-button');
+	// Bind events
 	$(document).on('click', '.tour-button', function(e){
 		e.preventDefault();
 		self.next();
+	}).on('keydown', function(e){
+		e.preventDefault();
+		var key = e.which || e.keyCode || 0;
+		switch(key){
+			case 13 :
+				self.next();
+				break;
+			case 27 :
+				self.destroy();
+				break;
+			default :
+				break;
+		}
 	});
 };
 
@@ -127,8 +140,6 @@ Tour.prototype.init = function(){
 Tour.prototype.positionTips = function(){
 	var self 	= this,
 		counter = 1;
-
-	// TODO - Need to check if the tip is still on the screen and if not scale and possibly re-position it.
 
 	$('.tour-step').each(function(){
 		var $this 			= $(this),
@@ -182,5 +193,9 @@ Tour.prototype.next = function(){
 
 // Method to destroy the current tour, also called when you've finished the tour
 Tour.prototype.destroy = function(){
+	// Unbind events
+	$(document).off('click', '.tour-button');
+	$(document).off('keydown');
+	// Remove tour elements
 	$('.tour-step, .tour-expose').remove();
 };
