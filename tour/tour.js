@@ -10,7 +10,6 @@ var Tour = function(element, options){
 		return false;
 	}
 	this.element 		= element;
-	this.theme 			= $(this.element).attr('data-theme'),
 	this.currentStep 	= 0,
 	this.lastStep	 	= 0,
 	this.windowWidth 	= $(window).width(),
@@ -18,6 +17,7 @@ var Tour = function(element, options){
 
 	// Default options
 	this.defaults 		= {
+		theme 			: 'light',
 		progress 		: false,
 		intelitip 		: false,
 		tipWidth 		: 300,
@@ -64,28 +64,28 @@ Tour.prototype.init = function(){
 			}
 
 			if (tipLocation == 'top') {
-				var tip = '<div class="tour-step '+tipLocation+' '+self.theme+'" data-target="'+target+'" data-step="'+counter+'" style="left:'+targetOffset.left+'px; '+tipLocation+':'+((targetOffset.top + targetHeight) + 15)+'px">'
+				var tip = '<div class="tour-step '+tipLocation+' '+self.settings.theme+'" data-target="'+target+'" data-step="'+counter+'" style="left:'+targetOffset.left+'px; '+tipLocation+':'+((targetOffset.top + targetHeight) + 15)+'px">'
 						+ 		'<div class="tour-tip"></div>'
 						+		$this.html()
 						+		progress
 						+ 		'<a href="#" class="tour-button">'+$this.data('button')+'</a>'
 						+ '</div>';
 			} else if (tipLocation == 'bottom') {
-				var tip = '<div class="tour-step '+tipLocation+' '+self.theme+'" data-target="'+target+'" data-step="'+counter+'" style="left:'+targetOffset.left+'px; '+tipLocation+':'+((self.windowHeight - (targetOffset.top + targetHeight)) + (targetHeight + 15))+'px">'
+				var tip = '<div class="tour-step '+tipLocation+' '+self.settings.theme+'" data-target="'+target+'" data-step="'+counter+'" style="left:'+targetOffset.left+'px; '+tipLocation+':'+((self.windowHeight - (targetOffset.top + targetHeight)) + (targetHeight + 15))+'px">'
 						+ 		'<div class="tour-tip"></div>'
 						+		$this.html()
 						+		progress
 						+ 		'<a href="#" class="tour-button">'+$this.data('button')+'</a>'
 						+ '</div>';
 			} else if (tipLocation == 'left') {
-				var tip = '<div class="tour-step '+tipLocation+' '+self.theme+'" data-target="'+target+'" data-step="'+counter+'" style="top:'+targetOffset.top+'px; '+tipLocation+':'+(targetOffset.left + targetWidth + 15)+'px">'
+				var tip = '<div class="tour-step '+tipLocation+' '+self.settings.theme+'" data-target="'+target+'" data-step="'+counter+'" style="top:'+targetOffset.top+'px; '+tipLocation+':'+(targetOffset.left + targetWidth + 15)+'px">'
 						+ 		'<div class="tour-tip"></div>'
 						+		$this.html()
 						+		progress
 						+ 		'<a href="#" class="tour-button">'+$this.data('button')+'</a>'
 						+ '</div>';
 			} else if (tipLocation == 'right') {
-				var tip = '<div class="tour-step '+tipLocation+' '+self.theme+'" data-target="'+target+'" data-step="'+counter+'" style="top:'+targetOffset.top+'px; '+tipLocation+':'+((self.windowWidth - targetOffset.left) + 15)+'px">'
+				var tip = '<div class="tour-step '+tipLocation+' '+self.settings.theme+'" data-target="'+target+'" data-step="'+counter+'" style="top:'+targetOffset.top+'px; '+tipLocation+':'+((self.windowWidth - targetOffset.left) + 15)+'px">'
 						+ 		'<div class="tour-tip"></div>'
 						+		$this.html()
 						+		progress
@@ -106,7 +106,7 @@ Tour.prototype.init = function(){
 	});
 
 	if (self.settings.expose == true) {
-		$('body').append('<div class="tour-expose"></div>');
+		$('body').append('<div class="tour-expose '+self.settings.theme+'"></div>');
 	};
 
 	// Set the current step
