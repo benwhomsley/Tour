@@ -1,12 +1,13 @@
 /*Tour style*/
-.tour-step { position: absolute; padding: 20px; box-sizing: border-box; width: 300px; opacity: 0; visibility: hidden; pointer-events: none; z-index: 9999; -webkit-transition: opacity 0.5s; transition: opacity 0.5s; }
+.tour-step { position: absolute; padding: 20px; box-sizing: border-box; width: 300px; opacity: 0; visibility: hidden; pointer-events: none; z-index: 9998; -webkit-transition: opacity 0.5s; transition: opacity 0.5s; }
 .tour-step.current { opacity: 1; visibility: visible; pointer-events: all; }
 .tour-step h2, .tour-step p { margin: 0 0 20px 0; }
 .tour-step a { padding: 8px 12px; font-size: 14px; text-decoration: none; line-height: 1; box-sizing: border-box; float: left; cursor: pointer; }
 .tour-step a:hover { background-color: #333; }
-.tour-step .tour-tip { position: absolute; border-style: solid; z-index: 9999; }
+.tour-step .tour-tip { position: absolute; border-style: solid; z-index: 9998; }
 .tour-step .tour-progress { position: absolute; right: 12px; bottom: 10px; font-size: 12px; opacity: 0.5; }
 .tour-expose { position: fixed; top: 0; bottom: 0; left: 0; right: 0; opacity: 0; z-index: 9997; -webkit-transition: opacity 0.3s; transition: opacity 0.3s; -webkit-animation: fadeIn 0.3s linear; animation: fadeIn 0.3s linear; -webkit-animation-fill-mode: forwards; animation-fill-mode: forwards; }
+.tip-expose { z-index: 9999; }
 
 @-webkit-keyframes fadeIn {
     from 	{ opacity: 0; }
@@ -19,19 +20,19 @@
 
 
 /*Tour light theme*/
+.tour-expose.light { background-color: #000; }
 .tour-step.light { background-color: #fff; color: #333; }
 .tour-step.light a { background-color: #333; color: #fff; }
 .tour-step.light.top .tour-tip 		{ position: absolute; border-width: 0 15px 15px 15px; border-color: transparent transparent #fff transparent; top: -15px; left: 20px; }
 .tour-step.light.left .tour-tip 	{ position: absolute; border-width: 15px 15px 15px 0; border-color: transparent #fff transparent transparent; top: 20px; left: -15px; }
 .tour-step.light.right .tour-tip 	{ position: absolute; border-width: 15px 0 15px 15px; border-color: transparent transparent transparent #fff; top: 20px; right: -15px; }
 .tour-step.light.bottom .tour-tip 	{ position: absolute; border-width: 15px 15px 0 15px; border-color: #fff transparent transparent transparent; bottom: -15px; left: 20px; }
-.tour-expose.light { background-color: #000; }
 
 /*Tour dark theme*/
+.tour-expose.dark { background-color: #fff; }
 .tour-step.dark { background-color: #333; color: #fff; }
 .tour-step.dark a { background-color: #fff; color: #333; }
 .tour-step.dark.top .tour-tip 		{ position: absolute; border-width: 0 15px 15px 15px; border-color: transparent transparent #333 transparent; top: -15px; left: 20px; }
 .tour-step.dark.left .tour-tip 		{ position: absolute; border-width: 15px 15px 15px 0; border-color: transparent #333 transparent transparent; top: 20px; left: -15px; }
 .tour-step.dark.right .tour-tip 	{ position: absolute; border-width: 15px 0 15px 15px; border-color: transparent transparent transparent #333; top: 20px; right: -15px; }
 .tour-step.dark.bottom .tour-tip 	{ position: absolute; border-width: 15px 15px 0 15px; border-color: #333 transparent transparent transparent; bottom: -15px; left: 20px; }
-.tour-expose.dark { background-color: #fff; }

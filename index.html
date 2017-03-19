@@ -54,15 +54,24 @@
 </body>
 
 <script type="text/javascript">
-	$('#start-tour').on('click', function(){
-		var options = {
-			theme 		: 'light',
-			progress 	: true,
-			intelitip 	: true,
-			tipWidth 	: 500,
-			expose 		: true
-		}
-		var tour = new Tour('#tour', options);
+	$(function(){
+		$('.element').each(function(){
+			var r = Math.floor(Math.random() * 255),
+				g = Math.floor(Math.random() * 255),
+				b = Math.floor(Math.random() * 255);
+			$(this).css({backgroundColor:'rgba('+r+','+g+','+b+',1)'});
+		});
+
+		$('#start-tour').on('click', function(){
+			var options = {
+				theme 		: 'light',
+				progress 	: true,
+				intelitip 	: true,
+				tipWidth 	: 500,
+				expose 		: true
+			}
+			var tour = new Tour('#tour', options);
+		});
 	});
 </script>
 

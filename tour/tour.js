@@ -1,6 +1,4 @@
 // TO DO LIST
-// - Add expose layer and possibly an extra option on the tip to remove the next button to force people to click the target element
-
 // - Need to check if the tip is still on the screen and if not scale and possibly re-position it - inside positionTips method.
 // - Optimize code (ongoing)
 
@@ -108,13 +106,14 @@ Tour.prototype.init = function(){
 
 	if (self.settings.expose == true) {
 		$('body').append('<div class="tour-expose '+self.settings.theme+'"></div>');
+		$($('.tour-step[data-step="1"]').attr('data-target')).addClass('tip-expose');
 	};
 
 	// Set the current step
 	$('.tour-step[data-step="1"]').addClass('current');
 
 	// Set the current step
-	this.currentStep = 1;
+	self.currentStep = 1;
 
 	// Bind events
 	$(document).on('click', '.tour-button', function(e){
@@ -182,11 +181,19 @@ Tour.prototype.update = function(){
 
 // Method for showing the next tip
 Tour.prototype.next = function(){
+	var currentPost = $('.tour-step.current'),
+		nextPost 	= $('.tour-step[data-step="'+(this.currentStep + 1)+'"]');
+
+	$(currentPost.attr('data-target')).removeClass('tip-expose');
+
 	if (this.currentStep == this.lastStep) {
 		this.destroy();
 	} else {
-		$('.tour-step.current').removeClass('current');
-		$('.tour-step[data-step="'+(this.currentStep + 1)+'"]').addClass('current');
+		currentPost.removeClass('current');
+		nextPost.addClass('current');
+		if (this.settings.expose == true) {
+			$(nextPost.attr('data-target')).addClass('tip-expose');
+		}
 		this.currentStep += 1;
 	};
 };
