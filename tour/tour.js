@@ -182,7 +182,9 @@ Tour.prototype.update = function(){
 // Method for showing the next tip
 Tour.prototype.next = function(){
 	var currentPost = $('.tour-step.current'),
-		nextPost 	= $('.tour-step[data-step="'+(this.currentStep + 1)+'"]');
+		nextPost 	= $('.tour-step[data-step="'+(this.currentStep + 1)+'"]'),
+		nextPostTop = nextPost.offset().top - 100;
+
 
 	$(currentPost.attr('data-target')).removeClass('tip-expose');
 
@@ -195,7 +197,10 @@ Tour.prototype.next = function(){
 			$(nextPost.attr('data-target')).addClass('tip-expose');
 		}
 		this.currentStep += 1;
+    	
+    	$('html, body').animate({scrollTop:nextPostTop}, 400);
 	};
+
 };
 
 // Method to destroy the current tour, also called when you've finished the tour
