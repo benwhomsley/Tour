@@ -1,13 +1,14 @@
 /*Tour style*/
-.tour-step { position: absolute; padding: 20px; box-sizing: border-box; width: 300px; opacity: 0; visibility: hidden; pointer-events: none; z-index: 9998; -webkit-transition: opacity 0.5s; transition: opacity 0.5s; }
+.hideOverflow { overflow: hidden; }
+.tour-step { position: absolute; padding: 20px; box-sizing: border-box; width: 300px; opacity: 0; visibility: hidden; pointer-events: none; z-index: 9999; -webkit-transition: opacity 0.5s; transition: opacity 0.5s; }
 .tour-step.current { opacity: 1; visibility: visible; pointer-events: all; }
 .tour-step h2, .tour-step p { margin: 0 0 20px 0; }
 .tour-step a { padding: 8px 12px; font-size: 14px; text-decoration: none; line-height: 1; box-sizing: border-box; float: left; cursor: pointer; }
 .tour-step a:hover { background-color: #333; }
-.tour-step .tour-tip { position: absolute; border-style: solid; z-index: 9998; }
+.tour-step .tour-tip { position: absolute; border-style: solid; z-index: 9999; }
 .tour-step .tour-progress { position: absolute; right: 12px; bottom: 10px; font-size: 12px; opacity: 0.5; }
 .tour-expose { position: fixed; top: 0; bottom: 0; left: 0; right: 0; opacity: 0; z-index: 9997; -webkit-transition: opacity 0.3s; transition: opacity 0.3s; -webkit-animation: fadeIn 0.3s linear; animation: fadeIn 0.3s linear; -webkit-animation-fill-mode: forwards; animation-fill-mode: forwards; }
-.tip-expose { z-index: 9999; }
+.tip-expose { z-index: 9998; }
 
 @-webkit-keyframes fadeIn {
     from 	{ opacity: 0; }

@@ -12,20 +12,18 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald" rel="stylesheet">
 
 <style type="text/css">
-	html, body { height: 100%; position: relative; margin: 0; padding: 0; border: 0; overflow: auto; }
+	body { position: relative; margin: 0; padding: 0; border: 0; overflow: auto; }
 	body { font-family: 'Open Sans', sans-serif; line-height: 1; }
 	h1,h2,h3,h4,h5,h6 { font-family: 'Oswald', sans-serif; }
 	p { font-size: 14px; }
 
-	.element { position: absolute; width: 200px; height: 150px; background-color: #333333; }
-	.element.left { left: 10px; top: 200px; }
-	.element.right { right: 10px; top: 200px; }
-	.element.bottom { bottom: 10px; left: 50%; }
-	.element.top { top: 10px; left: 50%; }
+	.clearfix:after { content: ""; display: table; clear: both; }
+
+	.element { float: left; position: relative; width: 500px; height: 800px; background-color: #333333; }
 	.hidden { display: none; }
 </style>
 
-<body>
+<body class="clearfix">
 	<div class="element left"></div>
 	<div class="element right"></div>
 	<div class="element top"></div>

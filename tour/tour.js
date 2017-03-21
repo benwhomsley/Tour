@@ -11,8 +11,8 @@ var Tour = function(element, options){
 	this.element 		= element;
 	this.currentStep 	= 0,
 	this.lastStep	 	= 0,
-	this.windowWidth 	= $(window).width(),
-	this.windowHeight 	= $(window).height(),
+	this.bodyWidth 		= $('body').width(),
+	this.bodyHeight 	= $('body').height(),
 
 	// Default options
 	this.defaults 		= {
@@ -54,9 +54,9 @@ Tour.prototype.init = function(){
 
 			if (targetOffset.top < 100) {
 				var tipLocation = 'top';
-			} else if (targetOffset.top + targetHeight > self.windowHeight - 100) {
+			} else if (targetOffset.top + targetHeight > self.bodyHeight - 100) {
 				var tipLocation = 'bottom';
-			} else if (targetOffset.left > self.windowWidth / 2) {
+			} else if (targetOffset.left > self.bodyWidth / 2) {
 				var tipLocation = 'right';
 			} else {
 				var tipLocation = 'left';
@@ -70,7 +70,7 @@ Tour.prototype.init = function(){
 						+ 		'<a href="#" class="tour-button">'+$this.data('button')+'</a>'
 						+ '</div>';
 			} else if (tipLocation == 'bottom') {
-				var tip = '<div class="tour-step '+tipLocation+' '+self.settings.theme+'" data-target="'+target+'" data-step="'+counter+'" style="left:'+targetOffset.left+'px; '+tipLocation+':'+((self.windowHeight - (targetOffset.top + targetHeight)) + (targetHeight + 15))+'px">'
+				var tip = '<div class="tour-step '+tipLocation+' '+self.settings.theme+'" data-target="'+target+'" data-step="'+counter+'" style="left:'+targetOffset.left+'px; '+tipLocation+':'+((self.bodyHeight - (targetOffset.top + targetHeight)) + (targetHeight + 15))+'px">'
 						+ 		'<div class="tour-tip"></div>'
 						+		$this.html()
 						+		progress
@@ -84,7 +84,7 @@ Tour.prototype.init = function(){
 						+ 		'<a href="#" class="tour-button">'+$this.data('button')+'</a>'
 						+ '</div>';
 			} else if (tipLocation == 'right') {
-				var tip = '<div class="tour-step '+tipLocation+' '+self.settings.theme+'" data-target="'+target+'" data-step="'+counter+'" style="top:'+targetOffset.top+'px; '+tipLocation+':'+((self.windowWidth - targetOffset.left) + 15)+'px">'
+				var tip = '<div class="tour-step '+tipLocation+' '+self.settings.theme+'" data-target="'+target+'" data-step="'+counter+'" style="top:'+targetOffset.top+'px; '+tipLocation+':'+((self.bodyWidth - targetOffset.left) + 15)+'px">'
 						+ 		'<div class="tour-tip"></div>'
 						+		$this.html()
 						+		progress
@@ -112,6 +112,8 @@ Tour.prototype.init = function(){
 	// Set the current step
 	$('.tour-step[data-step="1"]').addClass('current');
 
+	$('html, body').animate({scrollTop:$('.tour-step[data-step="1"]').offset().top - 100}, 400);
+
 	// Set the current step
 	self.currentStep = 1;
 
@@ -120,13 +122,14 @@ Tour.prototype.init = function(){
 		e.preventDefault();
 		self.next();
 	}).on('keydown', function(e){
-		e.preventDefault();
 		var key = e.which || e.keyCode || 0;
 		switch(key){
 			case 13 :
+				e.preventDefault();
 				self.next();
 				break;
 			case 27 :
+				e.preventDefault();
 				self.destroy();
 				break;
 			default :
@@ -149,23 +152,23 @@ Tour.prototype.positionTips = function(){
 
 		if (targetOffset.top < 100) {
 			var tipLocation = 'top';
-		} else if (targetOffset.top + targetHeight > self.windowHeight - 100) {
+		} else if (targetOffset.top + targetHeight > self.bodyHeight - 100) {
 			var tipLocation = 'bottom';
-		} else if (targetOffset.left > self.windowWidth / 2) {
+		} else if (targetOffset.left > self.bodyWidth / 2) {
 			var tipLocation = 'right';
 		} else {
 			var tipLocation = 'left';
-		};
+		}
 
 		if (tipLocation == 'top') {
 			$this.css({left:targetOffset.left,tipLocation:((targetOffset.top + targetHeight) + 15)});
 		} else if (tipLocation == 'bottom') {
-			$this.css({left:targetOffset.left,tipLocation:((self.windowHeight - (targetOffset.top + targetHeight)) + (targetHeight + 15))});
+			$this.css({left:targetOffset.left,tipLocation:((self.bodyHeight - (targetOffset.top + targetHeight)) + (targetHeight + 15))});
 		} else if (tipLocation == 'left') {
 			$this.css({top:targetOffset.top,tipLocation:(targetOffset.left + targetWidth + 15)});
 		} else if (tipLocation == 'right') {
-			$this.css({top:targetOffset.top,tipLocation:((self.windowWidth - targetOffset.left) + 15)});
-		};
+			$this.css({top:targetOffset.top,tipLocation:((self.bodyWidth - targetOffset.left) + 15)});
+		}
 
 		counter++;
 	});	
@@ -173,33 +176,30 @@ Tour.prototype.positionTips = function(){
 
 // Method for updating the attributes and managing methods needed to be called when something changes e.g. browser resize
 Tour.prototype.update = function(){
-	this.windowWidth 	= $(window).width(),
-	this.windowHeight 	= $(window).height();
+	this.bodyWidth 		= $('body').width(),
+	this.bodyHeight 	= $('body').height();
 
 	this.positionTips();
 };
 
 // Method for showing the next tip
 Tour.prototype.next = function(){
-	var currentPost = $('.tour-step.current'),
-		nextPost 	= $('.tour-step[data-step="'+(this.currentStep + 1)+'"]'),
-		nextPostTop = nextPost.offset().top - 100;
-
-
+	var currentPost = $('.tour-step.current');
 	$(currentPost.attr('data-target')).removeClass('tip-expose');
 
 	if (this.currentStep == this.lastStep) {
 		this.destroy();
 	} else {
+		var nextPost = $('.tour-step[data-step="'+(this.currentStep + 1)+'"]');
+
 		currentPost.removeClass('current');
 		nextPost.addClass('current');
 		if (this.settings.expose == true) {
 			$(nextPost.attr('data-target')).addClass('tip-expose');
 		}
 		this.currentStep += 1;
-    	
-    	$('html, body').animate({scrollTop:nextPostTop}, 400);
-	};
+    	$('html, body').animate({scrollTop:nextPost.offset().top - 100}, 400);
+	}
 
 };
 
